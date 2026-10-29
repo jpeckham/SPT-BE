@@ -1,0 +1,47 @@
+{
+  "bentoVersion": "0.2.5",
+  "builtAt": "2026-10-29T23:08:07Z",
+  "mode": "dev",
+  "buildType": "BLEEDINGEDGEMODS",
+  "buildConfig": "Release",
+  "sptVersion": "5.0.0",
+  "clientVersion": "48484",
+  "archive": {
+    "name": "SPT-BLEEDINGEDGEMODS-5.0.0-48484-bd58e5ec4-20261029.7z",
+    "sizeBytes": 689632385,
+    "sizeDisplay": "657.68 MB",
+    "md5Base64": "fh/XXNqyJ5ueoJK\u002B9B37OA=="
+  },
+  "release": {
+    "channel": "5.0",
+    "runtimeFolderName": "SPT_Runtime"
+  },
+  "nuget": {
+    "version": "5.0.0-pre.202610292308",
+    "packages": [
+      "SPTushonka.Common",
+      "SPTushonka.DI",
+      "SPTushonka.Reflection",
+      "SPTushonka.Server.Assets",
+      "SPTushonka.Server.Core",
+      "SPTushonka.Server.Web"
+    ]
+  },
+  "repos": {
+    "server": {
+      "path": "C:\\Users\\james\\source\\repos\\SP-Tushonka\\.local-build-attempt\\2026-10-29\\48484\\server-csharp",
+      "commit": "bd58e5ec4",
+      "dirty": true
+    },
+    "modules": {
+      "path": "C:\\Users\\james\\source\\repos\\SP-Tushonka\\.local-build-attempt\\2026-10-29\\48484\\modules",
+      "commit": "bb20512",
+      "dirty": false
+    },
+    "launcher": {
+      "path": "C:\\Users\\james\\source\\repos\\SP-Tushonka\\.local-build-attempt\\2026-10-29\\48484\\launcher",
+      "commit": "62ab55c",
+      "dirty": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "donor": "07bc012d0f0126fd32f536f3f99e103dff2af16b6e513086259c1fed7578e9ee",
+  "sites": {
+    "versiongate": "0xbaabb",
+    "cipher2": "0x2e96b0",
+    "fld_lea": "0x51dbc0",
+    "cipher1": "0xba97f",
+    "scratch": "0x4889b91"
+  },
+  "timestamp": "0x6ae26bbe",
+  "image_size": "0x6798000",
+  "changed_byte_offsets": [
+    "0x2720",
+    "0x2721",
+    "0x2722",
+    "0x2728",
+    "0x2729"
+  ],
+  "result_sha256": "e30a862dc89dc8a8d8875d0522c919effa76842f5ccbd1775576c8fe7d491986",
+  "limitation": "Unique pattern matches and guarded PE checks permit an experiment; they do not prove runtime compatibility."
+}

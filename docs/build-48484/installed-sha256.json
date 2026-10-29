@@ -1,0 +1,16 @@
+{
+  "GameAssembly.dll": "f812e85bed756e6f2cea6a5f8645f93fb2dc25908a2e78e1082ed88a50c280ea",
+  "version.dll": "e30a862dc89dc8a8d8875d0522c919effa76842f5ccbd1775576c8fe7d491986",
+  "EscapeFromTarkov.exe": "652ef5390f9ac39879873428488a94cfa206480a9109140da724567b605b2ea7",
+  "UnityPlayer.dll": "bfc3d16bd3c61edefe30e8cd40dd45ee3a08325ed588ec0255aa04f8c3c01b84",
+  "EscapeFromTarkov_Data/il2cpp_data/Metadata/global-metadata.dat": "2699cd0dda2035b01a452acac2b3e4200a136407ad01196bdb7545001f2b29cb",
+  "SPT_Runtime/SPT.Server.exe": "f41d21b9164ea9ecf12afb41b85ea13eff7e49d1032324933a25fa9085e7afe4",
+  "SPT_Runtime/SPT.Launcher.exe": "48a8d42fb5776526c25dcca74d1d5346bfed19d7e0e8d11960489b4a030c456d",
+  "BepInEx/plugins/sptushonka/SPTushonka.Common.dll": "34f201933761511fa5298d835644e4280525c7fb4adfadcb47729482e6e073a5",
+  "BepInEx/plugins/sptushonka/SPTushonka.Core.dll": "5d52d93a9a4a3f8f434b9da43ab1d20fbaa6ae4985632cd2cd09690cb7684019",
+  "BepInEx/plugins/sptushonka/SPTushonka.Custom.dll": "46e9024d74999183d3b9b4db3459167f5956124e827eb3327555b2d60e23e4dc",
+  "BepInEx/plugins/sptushonka/SPTushonka.Debugging.dll": "599b5d8bcdf522467fc7d3b8198e0a4ed8ff195b0a9e5544b3ffb265182146fc",
+  "BepInEx/plugins/sptushonka/SPTushonka.Reflection.dll": "f4fa69dbe368a3f7885b13b04fcca85aa0b5ea1e468f2294b2b75bcf28cb6020",
+  "BepInEx/plugins/sptushonka/SPTushonka.SinglePlayer.dll": "8eb24bd4e2c8b7c30ec13bc1c1d08923c5c89f0ebbb46e13f8c99af0809ce1c8",
+  "BepInEx/patchers/sptushonka-prepatch.dll": "0e14ab3080218e5380cecb6947968a54d4042162afe6ed3cd0e93390705622d2"
+}

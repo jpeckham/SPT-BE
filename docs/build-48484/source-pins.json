@@ -1,0 +1,22 @@
+{
+  "bento": {
+    "commit": "6fca3ff9ae340236b609abc1cafe6f927d0f26b4",
+    "branch": "spt-5.0-eft-1.3.0.0.48484",
+    "remote": "https://github.com/jpeckham/bento.git"
+  },
+  "launcher": {
+    "commit": "62ab55cbc964575e516303e5a6f3e878a2ae35b0",
+    "branch": "spt-5.0-eft-1.3.0.0.48484",
+    "remote": "https://github.com/jpeckham/launcher.git"
+  },
+  "modules": {
+    "commit": "bb205121fa55c6e0bfcb6b0d2f5d32fa2e99a096",
+    "branch": "spt-5.0-eft-1.3.0.0.48484",
+    "remote": "https://github.com/jpeckham/modules.git"
+  },
+  "server-csharp": {
+    "commit": "b36816ac8274f86801506d26a420e24d24b3c3fc",
+    "branch": "spt-5.0-eft-1.3.0.0.48484",
+    "remote": "https://github.com/jpeckham/server-csharp.git"
+  }
+}

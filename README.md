@@ -2,6 +2,8 @@
 
 Parent repository: [jpeckham/SPT-BE](https://github.com/jpeckham/SPT-BE). Child projects are pinned submodules of James's forks. See [source-control workflow](docs/SOURCE-CONTROL.md) for cloning, committing child changes, and updating the parent pins. Build histories below remain the record of how this local installation was produced.
 
+**Current branch experiment:** [EFT 1.3.0.0.48484](#new-eft-130048484-attempt--october-29-2026), separate from the preserved 48146 baseline. The installed new client identifies Unity 2022.3.43f2, not Unity 6.
+
 > **48146 baseline locked on 2026-10-29:** the installation is now `C:\sptarkov\SPTarkov 5.0.0-BE-1.2.5.0.48146`. Historical commands below retain the original `SPTarkov 5.0.0-local` path; use the renamed path for current builds. The five mod forks now use `spt-5.0-eft-1.2.5.0.48146`, with published baseline tags. See [the baseline record](docs/BASELINE-EFT-1.2.5.0.48146.md) for commits, backups, verification and unresolved issues. New EFT work must use a separate installation and branch.
 
 # How this local SPT 5.0 / EFT 48146 build was made
@@ -875,3 +877,96 @@ Freecam inspection identified another vulnerability: movement read the shared ca
 Added a regression test that failed on 2.0.1 for missing independent pose ownership. The new native-component harness passed 20 simulated external resets and moving-parent changes, paused Update restoration, LateUpdate/pre-cull restoration, release, and the existing suspension/reset guards. Release build passed with zero warnings/errors. The harness invokes render callbacks explicitly; it is not a substitute for an actual raid proving the leash is gone.
 
 Backed up the installed 2.0.1 DLL in the evidence folder and installed 2.0.2 into `BepInEx/plugins/Freecam`. Red/green logs are `freecam-red.log` and `freecam-green.log`. Test clients were launched only as native-component hosts without a backend; backend/session errors in those logs are unrelated to the harness. Both were closed and the temporary test DLL removed. No user server was stopped. In-raid Freecam retest remains required.
+
+
+## New EFT 1.3.0.0.48484 attempt — October 29, 2026
+
+This is a separate experimental attempt on parent branch `spt-5.0-eft-1.3.0.0.48484`. The locked 48146 installation, branches and tags remain preserved. No 48146 mods or personal profile are assumed compatible.
+
+### N1. Identify the actual installed update
+
+Read file version metadata from the live installation at `C:\Battlestate Games\Escape from Tarkov`. The executable reports **1.3.0.0-48484-07e1b327** (file version 1.3.0.48484). Although described initially as Unity 6, both `UnityPlayer.dll` and the serialized `globalgamemanagers` asset header identify **2022.3.43f2**. We are testing those actual files, not assuming a Unity 6 runtime.
+
+The live installation inventory contains 12,020 files totaling 87,457,448,846 bytes. C: had approximately 81.4 GiB free, less than the full game copy plus build/runtime overhead; D: had approximately 489.8 GiB free. The proposed separate target is `D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484`. A full robocopy was started there after presenting the storage choice; no links to mutable live files are used. Robocopy completed successfully (exit 1): 12,020 copied, zero failures/mismatches. A dry-run comparison reported zero pending changes or extras; GameAssembly and original metadata SHA-256 matched the live source.
+
+Local evidence: `.local-build-attempt/2026-10-29/48484/`. Native GameAssembly SHA-256: `f812e85bed756e6f2cea6a5f8645f93fb2dc25908a2e78e1082ed88a50c280ea`. Original metadata SHA-256: `de51dd8195166e566dc43e9be143d6ae09358f001f1efeaf06256b88a7dca48f`.
+
+### N2. Compare the team's current process and source
+
+Fetched current upstream branches without changing the 48146 checkouts. Read the versioned wiki's `SPT_50/bleeding-edge-install-instructions.md` (upstream main). Its supported process requires a complete live copy and a matching BE archive; if the client has advanced, it says to wait for an archive. The supplied Discord notes still describe the October 10 archive for 47965. No matching 48484 archive has been established in this session. Current public server source still declares `compatibleTarkovVersion: 1.2.5.0.48146`.
+
+Created isolated source worktrees under the attempt directory: clean modules `bb205121fa55c6e0bfcb6b0d2f5d32fa2e99a096` (without the old audio patch), server `bd58e5ec4d1a665c69bf12762be5017f7fbb6983`, launcher at current `62ab55c`, and Bento `6fca3ff9ae340236b609abc1cafe6f927d0f26b4`. Each has its own new-version branch. The new launcher includes the upstream Avalonia UI migration; it is not identical to yesterday's launcher.
+
+### N3. Initial compatibility probes
+
+The October 10 loader donor's four native signatures each match once in 48484. The new PE timestamp is `0x6ae26bbe`, image size `0x6798000`. These are preflight checks only, not proof that adapting the loader is safe or sufficient.
+
+Applied the current launcher's metadata delta to a separate output file using the same SharpHDiffPatch helper as the 48146 attempt. It produced 32,182,032 bytes with the expected metadata magic and SHA-256 `2699cd0dda2035b01a452acac2b3e4200a136407ad01196bdb7545001f2b29cb`. The current launcher explicitly lacks checksum validation in this path, so successful delta application is not evidence of semantic compatibility. Nothing was patched in the live installation.
+
+**Latest status:** package built and installed; server and patched client start and communicate. Profile/menu completion, a raid, and gameplay-mod compatibility remain unverified. See N7 for the startup evidence and current limits.
+
+### N4. Build and bootstrap the new references
+
+The current launcher published for Windows successfully without reported warnings/errors. The server published successfully with upstream compiler/UI warnings. Bento built with zero warnings/errors. These source builds alone do not establish new-client support.
+
+Created an experimental loader from the same hash-verified October 10 donor, using [the guarded helper](docs/build-48484/port_loader.py). It checks the exact donor/new GameAssembly hashes and unique signatures before changing only the PE timestamp/image-size comparison operands. Result SHA-256: `e30a862dc89dc8a8d8875d0522c919effa76842f5ccbd1775576c8fe7d491986`. This is a local adaptation necessitated by the missing matching published loader, not a documented team reference-build procedure.
+
+Bootstrapped the new copy with only core runtime/config/Unity reference libraries/dotnet/Doorstop from the preserved 48146 installation (including its previously built Il2CppInterop dependencies). Did not copy old generated interop, SPT patchers, gameplay mods, or personal saves. Every runtime input hash is recorded in local `runtime-inputs.json`. Applied metadata only in the new target and kept its original as `.spt-bak`. Moved the launcher's cleanup-list files into `.launcher-cleanup-backup` inside the new target with resolved-path bounds checks; no live files were changed.
+
+Started a reference-generation-only process. The loader reported all four signature sites and accepted canonical v31 metadata. Managed runtime loaded. Reference generation and module compilation subsequently succeeded as recorded in N5; this reference-only launch was not a working-game test.
+
+### N5. Compile clean modules and package with Bento
+
+BepInXDX generation completed, producing 172 interop-directory entries (including cache/databases). The reference-only bootstrap exited after chainloader initialization; no working game was claimed. Archived its logs locally. Built `modules/SPTushonka.Build/SPTushonka.Build.csproj` against the new target with `-p:GameDir=...`: zero errors and two existing unread-parameter warnings. No module source changes were needed.
+
+Changed **only the isolated server's compatibility marker** from 1.2.5.0.48146 to 1.3.0.0.48484 for this experiment and package naming. This does not migrate game data or establish protocol compatibility. Created a fresh reference package from the generated 48484 `BepInEx/core` and `interop`; copied the known runtime core into the isolated Bento assets so packaging will retain the runtime used for generation. [Source input hashes](docs/build-48484/runtime-inputs.json), [reference hashes](docs/build-48484/reference-sha256.json), [preflight report](docs/build-48484/preflight.json), and [loader report](docs/build-48484/loader-port-report.json) are source-controlled; binaries remain local.
+
+Commands from the workspace root (the earlier copy and bootstrap must be complete first):
+
+```powershell
+$attempt = '.local-build-attempt/2026-10-29/48484'
+python docs/build-48484/port_loader.py `
+  --donor .local-build-attempt/2026-10-28/team-47965/version.dll `
+  --game-assembly 'C:\Battlestate Games\Escape from Tarkov\GameAssembly.dll' `
+  --output-dir $attempt
+# Loader helper refuses to overwrite an existing candidate.
+dotnet run --project docs/build-48484/MetadataPatch -c Release -- `
+  'C:\Battlestate Games\Escape from Tarkov\EscapeFromTarkov_Data\il2cpp_data\Metadata\global-metadata.dat' `
+  "$attempt/launcher/SPTushonka.Core/SPT_Data/Launcher/Patches/SPT-core/EscapeFromTarkov_Data/il2cpp_data/Metadata/global-metadata.dat.delta" `
+  "$attempt/global-metadata.patched.dat"
+# Metadata helper likewise refuses an existing output.
+dotnet build "$attempt/modules/SPTushonka.Build/SPTushonka.Build.csproj" -c Release `
+  '-p:GameDir=D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484' -p:SPTushonkaVersion=5.0.0
+dotnet run --project "$attempt/bento/Bento.csproj" -c Release -- `
+  --no-config --version 5.0.0 --build-type BLEEDINGEDGEMODS `
+  --server "$attempt/server-csharp" --modules "$attempt/modules" --launcher "$attempt/launcher" `
+  --module-package "$attempt/reference-package" `
+  --version-dll "$attempt/version-48484-experimental.dll" --output "$attempt/dist"
+```
+
+Bento packaging and first full SPT startup results follow in N6–N7.
+
+### N6. Install package and start an isolated server/client
+
+Bento completed successfully: `SPT-BLEEDINGEDGEMODS-5.0.0-48484-bd58e5ec4-20261029.7z`, 689,632,385 bytes, MD5/Base64 `fh/XXNqyJ5ueoJK+9B37OA==`, containing 2,787 files. Extracted with 7-Zip into the new D: target. The archive retains the server commit label from before the local compatibility-marker commit; its manifest correctly records the server as dirty. The launcher's generated build metadata also makes its manifest entry dirty.
+
+Applied the already-established seasonal-event workaround only to the installed `SPT_Runtime/SPT_Data/configs/seasonalevents.json`: `enableSeasonalEventDetection=false`, retaining an original copy in the attempt evidence. This server uses the same data revision that previously failed in automatic Halloween setup; the setting avoids repeating that known failure and is not part of the package archive.
+
+Started `SPT_Runtime/SPT.Server.exe` with `SPT_Runtime` as working directory. It reached `Server has started, happy playing`, listened on localhost 6969, and `/launcher/v2/ping` returned `Pong!`. Created a fresh Standard account **LocalBuildTest48484** through `/launcher/v2/register`, and launched the new client with that session ID and localhost backend arguments. Wrote new launcher settings pointing to this D: installation and test account. No personal save or 48146 gameplay mods were copied.
+
+First full client startup results follow in N7. Server startup and successful compilation are not proof of a working menu or raid.
+
+### N7. Startup evidence, source-control checkpoint, and remaining tests
+
+The full client reported `Running under Unity 2022.3.43f2`, restored **38 gated exports with 0 failures**, loaded SPT's core/custom/single-player/debugging patches, and reached `Chainloader startup complete`. The displayed-version log is `SPT 5.0.0 (BEM) bd58e5 | 1.3.0.0.48484`. It connected to the local server, opened its session WebSocket, and requested configuration, languages, settings, items, customization, locales, globals, profiles, trader settings and profile-nickname data. The process remained responsive. Logs are archived in the local attempt directory as `client-startup-bepinex.log`, `client-startup-loader.log`, `client-unity.log`, and server stdout/stderr.
+
+These observations establish patched startup and backend communication, **not a verified main menu, completed raid, or error-free 1.3 support**. The fresh client logged missing local settings and used defaults. There were also missing Bear-skill and UI warnings. No personal save or gameplay mod was migrated. The running test account is LocalBuildTest48484; the client and server were left available for James to finish profile setup and test a short raid. The test uses the server/data revision documented above, not newly obtained 1.3-specific server data.
+
+Source-control state:
+
+- Parent and component branches: `spt-5.0-eft-1.3.0.0.48484` in James's forks. The parent pins the four build repositories to this experiment's source. Other submodules, including the five gameplay mods, remain at their recorded revisions and are **not installed/validated for 48484**.
+- Server compatibility-marker commit: `b36816ac8274f86801506d26a420e24d24b3c3fc`. No module logic change was required. Exact [source pins](docs/build-48484/source-pins.json), [Bento package manifest](docs/build-48484/package-manifest.json) and [installed hashes](docs/build-48484/installed-sha256.json) are retained.
+- Isolated worktrees remain in `.local-build-attempt/2026-10-29/48484`. The parent child checkouts use normal detached submodule pins; develop in the named worktrees or create an appropriate branch before editing a child checkout.
+- Prior 48146 generated changes were saved before selecting new pins: Bento stash `0c729075d3925b266a8c1b58aef287b65d318dc3`, Launcher stash `0fd69938955d44eb3d609d0bd9237d96227ea061`, both named `Preserved 48146 generated files before selecting 48484 parent pins`. These are local, alongside the earlier full dirty-state backup. Apply only after restoring the corresponding old checkout; do not apply blindly over the new version.
+
+The old installation and live source are preserved; no new-version files were installed into either. Do not run both SPT servers simultaneously on port 6969. To launch this test normally, start `D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\SPT.Server.exe`, wait for readiness, then launch `SPT.Launcher.exe` from the same runtime folder and choose LocalBuildTest48484. The direct-argument startup is verified; the new Avalonia launcher's interactive flow and an actual raid still need testing.

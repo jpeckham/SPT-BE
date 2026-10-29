@@ -1,0 +1,26 @@
+{
+  "version": "1.3.0.0-48484-07e1b327",
+  "unity": "2022.3.43f2",
+  "game_sha256": "f812e85bed756e6f2cea6a5f8645f93fb2dc25908a2e78e1082ed88a50c280ea",
+  "timestamp": "0x6ae26bbe",
+  "image_size": "0x6798000",
+  "patterns": {
+    "versiongate": [
+      "0xbaabb"
+    ],
+    "cipher2": [
+      "0x2e96b0"
+    ],
+    "fld_lea": [
+      "0x51dbc0"
+    ],
+    "cipher1": [
+      "0xba97f"
+    ]
+  },
+  "metadata": {
+    "size": 27987616,
+    "sha256": "de51dd8195166e566dc43e9be143d6ae09358f001f1efeaf06256b88a7dca48f",
+    "first16": "19324fbb75f91f517417e0a22d72c725"
+  }
+}
