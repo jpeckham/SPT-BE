@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-29",
+  "eft": "1.3.0.0.48484",
+  "branch": "spt-5.0-eft-1.3.0.0.48484",
+  "source_commits": {
+    "Deminvincibility": "bf8372d6bc9884e8feec12aebefd47822cd0c145",
+    "SPTOpenSesame": "bfd1cbdd41cda93731e5e1a62a79439b5bb6a7e4",
+    "SPT-Freecam": "ef4e251a05e35632fc07c48da240f83af96ca163",
+    "SPT-Skipper": "3acca4e1541c6d86ac1080a9d77cebf6b01337b3",
+    "SPT-RaidReview": "3d2337951b83299c62963f0840517a781bc471d4"
+  },
+  "installed_sha256": {
+    "BepInEx/plugins/Deminvincibility/Deminvincibility.dll": "0cf25efdd274b197a46f12a5c6785c8e44f92946a14dea5274a2eeb40b4c78d4",
+    "BepInEx/plugins/OpenSesame/SPTOpenSesame.dll": "e0661f7ea69743850b44f2e3ca73cb9eddef4b068de052bb00cfe9493b732c36",
+    "BepInEx/plugins/Freecam/Terkoiz.Freecam.dll": "2acd749b6667ae93a2bb43075d3d67a708e8d63f3cf4456cd3639becdcc955fb",
+    "BepInEx/plugins/Skipper/terkoiz-skipper.dll": "d6842b865d21a701ad99c688077a6e25c044a8eeed1acf34bae820ab1cd69e01",
+    "BepInEx/plugins/RaidReview/Newtonsoft.Json.dll": "22c649f75fce5be7c7ccda8880473b634ef69ecf33f5d1ab8ad892caf47d5a07",
+    "BepInEx/plugins/RaidReview/RAID_REVIEW.dll": "2f299bfd3f373b9d9264017b5effa4f7226f99b0ef5c855aef008cff4176b581",
+    "BepInEx/plugins/RaidReview/websocket-sharp.dll": "339c740207f308d9e86b03a4d45d29f17c52476d1ecda88afa9f607966d226fc",
+    "SPT_Runtime/user/mods/RaidReview/RaidReview.dll": "4d4e31aa9c8c16ba5eb5fbf28cb30c692130b4d352bac32b57a128a7fbfe54f5",
+    "SPT_Runtime/user/mods/RaidReview/lib/sqlite/Microsoft.Data.Sqlite.dll": "86831b3786d98d7629c80faeaacf3bdc8caab18f18b2eb2905aade667127578c",
+    "SPT_Runtime/user/mods/RaidReview/lib/sqlite/SQLitePCLRaw.batteries_v2.dll": "7709df124c5517feeed99c6ceecbd0cb179230d09732f5d6cb39b446dfb2e347",
+    "SPT_Runtime/user/mods/RaidReview/lib/sqlite/SQLitePCLRaw.core.dll": "626b7902809d6d4a7508d92c84cecfa447761f3e992e708fff97f0738e530615",
+    "SPT_Runtime/user/mods/RaidReview/lib/sqlite/SQLitePCLRaw.provider.e_sqlite3.dll": "f92be7dc1207bc9d2082c9f7cbe4a6bd22b4c4953c65ade83fcfeaa14b07be83",
+    "SPT_Runtime/user/mods/RaidReview/runtimes/win-x64/native/e_sqlite3.dll": "aae45df6d47b9cadfc17938763079dcd89f575af73ca4168bc5d58ee63b400ad"
+  },
+  "verification": {
+    "raidreview_checks": 1632,
+    "native_harnesses": [
+      "Freecam PASS",
+      "OpenSesame PASS",
+      "Skipper PASS"
+    ],
+    "all_five_plugins_loaded": true,
+    "full_modded_raid_tested": false,
+    "source_vs_installed_six_main_dlls": "exact match"
+  }
+}

@@ -903,7 +903,7 @@ The October 10 loader donor's four native signatures each match once in 48484. T
 
 Applied the current launcher's metadata delta to a separate output file using the same SharpHDiffPatch helper as the 48146 attempt. It produced 32,182,032 bytes with the expected metadata magic and SHA-256 `2699cd0dda2035b01a452acac2b3e4200a136407ad01196bdb7545001f2b29cb`. The current launcher explicitly lacks checksum validation in this path, so successful delta application is not evidence of semantic compatibility. Nothing was patched in the live installation.
 
-**Latest status:** package built and installed; patched client/server startup succeeded, followed by profile creation, local-raid startup, bot generation and active bot-patrol logs. Completed-raid stability and gameplay-mod compatibility remain unverified. See N7 for evidence and limits.
+**Latest status:** James confirmed the intro tutorial worked. His personal save and five rebuilt gameplay mods are now installed, with startup and automated checks completed. See N8 for the migration, validation and remaining gameplay limits.
 
 ### N4. Build and bootstrap the new references
 
@@ -972,3 +972,42 @@ Source-control state:
 The old installation and live source are preserved; no new-version files were installed into either. Do not run both SPT servers simultaneously on port 6969. To launch this test normally, start `D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\SPT.Server.exe`, wait for readiness, then launch `SPT.Launcher.exe` from the same runtime folder and choose LocalBuildTest48484. The direct-argument startup is verified; the new Avalonia launcher's interactive flow and an actual raid still need testing.
 
 **Later observation during this attempt:** after the initial startup checkpoint, the server received `/client/game/profile/create`, `/client/raid/configuration`, `/client/match/local/start` and bot-generation requests. The client then logged active bot patrol updates. This establishes progress into a running local raid; it does not establish extraction/raid completion, save integrity across a completed raid, or long-session stability. Server bot-difficulty fallback warnings remain. Both test processes were left running for James.
+
+
+### N8. Personal save and five mods — October 29, 2026
+
+James confirmed that the intro tutorial worked on 48484 and requested his save and mods. This is a local migration/port, not a newly published team build or an official mod release. The old 48146 installation remains untouched.
+
+1. Confirmed the client/launcher were closed and stopped our 48484 test server before copying data. Created `SPT_Runtime/user/migration-backups/20261029-48484-mods-save` in the new D: installation, containing `profiles-before`, `launcher-before`, `client-config-before` and an exact `JheredParnell-source.json` backup. The original save also remains in the old installation.
+2. Copied only the personal profile `6ade9760458eb1d96422317f.json` from the old installation's `SPT_Runtime/user/profiles` into the new installation's corresponding folder. Kept the new tutorial account; did not copy the old disposable test account. Import-time SHA-256 matched exactly: `B927EDF6101255D17E8FFC3E109EA30D6C8A9D30752EB3E36BAD76B38AE5954C`. Subsequent server saves may change the destination file normally.
+3. Created `spt-5.0-eft-1.3.0.0.48484` branches in all five mod forks from their preserved 48146 heads. Changed project defaults, including runtime-test projects, to the new D: installation so compilation uses newly generated 48484 references. Kept existing mod versions and previous fixes.
+4. Built the six projects below with .NET 10, Release, `-p:SkipDeploy=true`. Three client mods and the server built unchanged. OpenSesame's locale listener required explicit `DelegateSupport.ConvertDelegate<Il2CppSystem.Action>`. RaidReview's menu required explicit `UnityAction<bool>` conversion, and its optional SAIN component lookup required `Il2CppType.From`. These were reproducible compiler errors against the new generated reference signatures, not evidence that upstream's documented build steps failed. No new SPT modules/core patch was needed. All builds then passed; OpenSesame retains nine generated locale-name warnings on a full compile.
+5. Installed each staged plugin directory into the new `BepInEx/plugins`, including bundled dependencies/licenses. Deminvincibility's staged DLL and license were placed in its own folder. Copied only the five matching mod configuration files from the old `BepInEx/config`: `com.hazelify.deminvincibility.cfg`, `com.danw.opensesame.cfg`, `com.terkoiz.freecam.cfg`, `com.terkoiz.skipper.cfg`, and `ekky.raidreview.cfg`. Existing preferences, including RaidReview performance logging, were retained.
+6. Copied the old RaidReview `data` and `config` directories into the new `SPT_Runtime/user/mods/RaidReview` while both servers were stopped. Deployed the freshly built server using its explicit deployment target below and included its license. Managed SQLite dependencies remain under `lib/sqlite`, with native SQLite under `runtimes/win-x64/native`; they are not top-level server mods. No old RaidReview DLL was copied.
+7. Updated the new launcher's `PreferredProfile.ProfileId` to the personal profile, preserving its D: `GamePath`. Started the new server. The launcher profile API returned JheredParnell, level 10, 65,604 XP, Unheard, `wipe: false`. RaidReview loaded successfully, its HTTP API returned 200 and listed all three historical recordings, including both Shoreline raids. No old raids were purged at startup.
+8. Built and temporarily installed the existing OpenSesame, Freecam and Skipper runtime-test plugins. Launched only the disposable LocalBuildTest48484 account. All five gameplay plugins loaded, chainloader startup completed, RaidReview patches enabled and its WebSocket connected. All three native test harnesses logged PASS. Closed that test client normally, archived its log and removed all three harness DLLs. The server remains running for normal launcher use; JheredParnell is the preferred profile.
+
+Build projects from the workspace root:
+
+| Mod | Project | Installed version |
+| --- | --- | --- |
+| Deminvincibility | `mods/Deminvincibility/Deminvincibility.csproj` | 3.0.1 |
+| OpenSesame | `mods/SPTOpenSesame/SPTOpenSesame.csproj` | 4.0.0 |
+| Freecam | `mods/SPT-Freecam/project/Terkoiz.Freecam/Terkoiz.Freecam.csproj` | 2.0.2 |
+| Skipper | `mods/SPT-Skipper/Terkoiz.Skipper.csproj` | 1.2.0 |
+| RaidReview client | `mods/SPT-RaidReview/Client/RAID-REVIEW.csproj` | 2.0.1 |
+| RaidReview server | `mods/SPT-RaidReview/ServerMod/ServerMod.csproj` | 2.0.1 |
+
+```powershell
+# Run for each project above; defaults now select the 48484 installation.
+dotnet build <project> -c Release -p:SkipDeploy=true
+# Explicit server deployment after preserving/copying data and config:
+dotnet build mods/SPT-RaidReview/ServerMod/ServerMod.csproj -c Release -p:SkipDeploy=false `
+  '-p:SptModDirectory=D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\user\mods\RaidReview'
+```
+
+RaidReview automated checks passed: RecordingPipeline 1,182; HeadlessPresentation 56; BehaviorDecisions 68; SwitchRecording 23; RaidTransfer 289; SqliteIsolation 14 — **1,632 total**. Run the first five with `dotnet run --project mods/SPT-RaidReview/Tests/<name> -c Release`; SQLite isolation additionally takes `-- alone <absolute ServerMod/bin/Release/RaidReview> <absolute target/SPT_Runtime>`. The native Freecam test verified independent pose through 20 native resets and parent moves, paused/late/render restoration, release and native-camera suspension. OpenSesame covered locale/fallback/native callbacks after GC; Skipper covered target resolution, native progress and callbacks after GC.
+
+Validation limits: this was startup/native-component testing, not a new full modded raid. Freecam's actual in-raid leashing and RaidReview's sustained FPS still need a user retest; neither is declared resolved by the rebuild. SAIN is absent, so its optional integration is compile-checked only. The test client logged a WebSocket frame-read exception during normal shutdown and an invalid-layer warning; startup/mod loading did not log a plugin failure. Earlier game-data compatibility limitations remain. The personal save was read/loaded by the server, not used for a test raid.
+
+Evidence is local under `.local-build-attempt/2026-10-29/48484/mods-save-migration` (build, automated-test, server and client logs). Public source pins and installed binary hashes are in [the mod manifest](docs/build-48484/mods-manifest.json); saves, settings, recordings and binaries stay outside Git. Earlier N6–N7 statements about no mods/save describe the pre-migration checkpoint and are superseded by N8.
