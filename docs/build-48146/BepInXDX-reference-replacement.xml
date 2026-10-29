@@ -1,0 +1,24 @@
+        <Reference Include="Cpp2IL.Core">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\Cpp2IL.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="LibCpp2IL">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\LibCpp2IL.dll</HintPath>
+        </Reference>
+        <Reference Include="Disarm">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\Disarm.dll</HintPath>
+        </Reference>
+        <Reference Include="WasmDisassembler">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\WasmDisassembler.dll</HintPath>
+        </Reference>
+        <Reference Include="StableNameDotNet">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\StableNameDotNet.dll</HintPath>
+        </Reference>
+        <Reference Include="AssetRipper.CIL">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\AssetRipper.CIL.dll</HintPath>
+        </Reference>
+        <Reference Include="AssetRipper.Primitives">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\AssetRipper.Primitives.dll</HintPath>
+        </Reference>
+        <Reference Include="Gee.External.Capstone">
+            <HintPath>..\..\..\..\bento\assets\il2cpp\BepInEx\core\Gee.External.Capstone.dll</HintPath>
+        </Reference>

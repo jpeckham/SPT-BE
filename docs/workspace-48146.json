@@ -1,0 +1,155 @@
+{
+  "eftVersion": "1.2.5.0.48146",
+  "sptVersion": "5.0.0",
+  "branch": "spt-5.0-eft-1.2.5.0.48146",
+  "note": "Committed workspace pins; generated dirty files and installed build provenance are documented separately.",
+  "repositories": [
+    {
+      "path": "assembly-tool",
+      "upstream": "SP-Tushonka/assembly-tool",
+      "fork": "jpeckham/assembly-tool",
+      "url": "https://github.com/jpeckham/assembly-tool.git",
+      "head": "a59b81081d78b01a7a3b0b8a32fac2e838c1fae8"
+    },
+    {
+      "path": "bento",
+      "upstream": "SP-Tushonka/bento",
+      "fork": "jpeckham/bento",
+      "url": "https://github.com/jpeckham/bento.git",
+      "head": "dfb7d597dd3f19f6e61973871f9b83a71b895a6b"
+    },
+    {
+      "path": "BepInXDX",
+      "upstream": "SP-Tushonka/BepInXDX",
+      "fork": "jpeckham/BepInXDX",
+      "url": "https://github.com/jpeckham/BepInXDX.git",
+      "head": "08c2ac09c7f8fd7aef56a8b5ebd7a03e2f956442"
+    },
+    {
+      "path": "build",
+      "upstream": "SP-Tushonka/build",
+      "fork": "jpeckham/build",
+      "url": "https://github.com/jpeckham/build.git",
+      "head": "4ab4dbb0189709b1cb7b04d84bb4d1399f3db466"
+    },
+    {
+      "path": "forge",
+      "upstream": "SP-Tushonka/forge",
+      "fork": "jpeckham/forge",
+      "url": "https://github.com/jpeckham/forge.git",
+      "head": "3270c3621f88052ffa6cc361e0f36c4e38c8127a"
+    },
+    {
+      "path": "Il2CppInterop",
+      "upstream": "SP-Tushonka/Il2CppInterop",
+      "fork": "jpeckham/Il2CppInterop",
+      "url": "https://github.com/jpeckham/Il2CppInterop.git",
+      "head": "6a04b2c6299ac2aee658f3ffb18aab0a638cd6cc"
+    },
+    {
+      "path": "installer",
+      "upstream": "SP-Tushonka/installer",
+      "fork": "jpeckham/installer",
+      "url": "https://github.com/jpeckham/installer.git",
+      "head": "3f1d5b86ee1cc61806065b68dc10a3a1203548c0"
+    },
+    {
+      "path": "launcher",
+      "upstream": "SP-Tushonka/launcher",
+      "fork": "jpeckham/launcher",
+      "url": "https://github.com/jpeckham/launcher.git",
+      "head": "189774f4374dc3676291a36a5eb188a94877099b"
+    },
+    {
+      "path": "lfs",
+      "upstream": "SP-Tushonka/lfs",
+      "fork": "jpeckham/lfs",
+      "url": "https://github.com/jpeckham/lfs.git",
+      "head": "384e911549fe8f2176583047d24953c1f7d66836"
+    },
+    {
+      "path": "modules",
+      "upstream": "SP-Tushonka/modules",
+      "fork": "jpeckham/modules",
+      "url": "https://github.com/jpeckham/modules.git",
+      "head": "9a5e4da40988f379db1a9f7f36fdcb7d39665be8"
+    },
+    {
+      "path": "patcher",
+      "upstream": "SP-Tushonka/patcher",
+      "fork": "jpeckham/patcher",
+      "url": "https://github.com/jpeckham/patcher.git",
+      "head": "72c24c1fec295136cba3fcc87040b6eef2b9fb12"
+    },
+    {
+      "path": "server",
+      "upstream": "SP-Tushonka/server",
+      "fork": "jpeckham/server",
+      "url": "https://github.com/jpeckham/server.git",
+      "head": "8f1d50fb7ccf35d696a47b587448b9b79f7e8027"
+    },
+    {
+      "path": "server-csharp",
+      "upstream": "SP-Tushonka/server-csharp",
+      "fork": "jpeckham/server-csharp",
+      "url": "https://github.com/jpeckham/server-csharp.git",
+      "head": "c775c3bbe39dd8862ba7baf5b7fcd5003fbdaee4"
+    },
+    {
+      "path": "server-mod-examples",
+      "upstream": "SP-Tushonka/server-mod-examples",
+      "fork": "jpeckham/server-mod-examples",
+      "url": "https://github.com/jpeckham/server-mod-examples.git",
+      "head": "d1f077ee2be179c00db3141b3df6011213090ebb"
+    },
+    {
+      "path": "spt-item-finder",
+      "upstream": "SP-Tushonka/spt-item-finder",
+      "fork": "jpeckham/spt-item-finder",
+      "url": "https://github.com/jpeckham/spt-item-finder.git",
+      "head": "0833e93e14ce9f30120b8575d82fe8d12cfeb457"
+    },
+    {
+      "path": "wiki",
+      "upstream": "SP-Tushonka/wiki",
+      "fork": "jpeckham/wiki",
+      "url": "https://github.com/jpeckham/wiki.git",
+      "head": "3dbe21b67bb625b45d84be2b9351e5ee6c0d7bea"
+    },
+    {
+      "path": "mods/Deminvincibility",
+      "upstream": "jpeckham/Deminvincibility",
+      "fork": "jpeckham/Deminvincibility",
+      "url": "https://github.com/jpeckham/Deminvincibility.git",
+      "head": "6bb80e3b236cc8ed8abc35518163a03e9e232283"
+    },
+    {
+      "path": "mods/SPT-Freecam",
+      "upstream": "jpeckham/SPT-Freecam",
+      "fork": "jpeckham/SPT-Freecam",
+      "url": "https://github.com/jpeckham/SPT-Freecam.git",
+      "head": "2323dd6f30cd1b5b7b159679fb88c6880755453b"
+    },
+    {
+      "path": "mods/SPT-RaidReview",
+      "upstream": "jpeckham/SPT-RaidReview",
+      "fork": "jpeckham/SPT-RaidReview",
+      "url": "https://github.com/jpeckham/SPT-RaidReview.git",
+      "head": "3c01f679640d99fa5fb45dc253696be8ef1ba644"
+    },
+    {
+      "path": "mods/SPT-Skipper",
+      "upstream": "jpeckham/SPT-Skipper",
+      "fork": "jpeckham/SPT-Skipper",
+      "url": "https://github.com/jpeckham/SPT-Skipper.git",
+      "head": "52a5766295c0ec34f4ac886d201b38be6bb03b60"
+    },
+    {
+      "path": "mods/SPTOpenSesame",
+      "upstream": "jpeckham/SPTOpenSesame",
+      "fork": "jpeckham/SPTOpenSesame",
+      "url": "https://github.com/jpeckham/SPTOpenSesame.git",
+      "head": "d46c36c6038a25a5330f45490172f490696cf047"
+    }
+  ]
+}

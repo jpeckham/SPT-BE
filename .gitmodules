@@ -1,0 +1,63 @@
+[submodule "assembly-tool"]
+	path = assembly-tool
+	url = https://github.com/jpeckham/assembly-tool.git
+[submodule "bento"]
+	path = bento
+	url = https://github.com/jpeckham/bento.git
+[submodule "BepInXDX"]
+	path = BepInXDX
+	url = https://github.com/jpeckham/BepInXDX.git
+[submodule "build"]
+	path = build
+	url = https://github.com/jpeckham/build.git
+[submodule "forge"]
+	path = forge
+	url = https://github.com/jpeckham/forge.git
+[submodule "Il2CppInterop"]
+	path = Il2CppInterop
+	url = https://github.com/jpeckham/Il2CppInterop.git
+[submodule "installer"]
+	path = installer
+	url = https://github.com/jpeckham/installer.git
+[submodule "launcher"]
+	path = launcher
+	url = https://github.com/jpeckham/launcher.git
+[submodule "lfs"]
+	path = lfs
+	url = https://github.com/jpeckham/lfs.git
+[submodule "modules"]
+	path = modules
+	url = https://github.com/jpeckham/modules.git
+[submodule "patcher"]
+	path = patcher
+	url = https://github.com/jpeckham/patcher.git
+[submodule "server"]
+	path = server
+	url = https://github.com/jpeckham/server.git
+[submodule "server-csharp"]
+	path = server-csharp
+	url = https://github.com/jpeckham/server-csharp.git
+[submodule "server-mod-examples"]
+	path = server-mod-examples
+	url = https://github.com/jpeckham/server-mod-examples.git
+[submodule "spt-item-finder"]
+	path = spt-item-finder
+	url = https://github.com/jpeckham/spt-item-finder.git
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/jpeckham/wiki.git
+[submodule "mods/Deminvincibility"]
+	path = mods/Deminvincibility
+	url = https://github.com/jpeckham/Deminvincibility.git
+[submodule "mods/SPT-Freecam"]
+	path = mods/SPT-Freecam
+	url = https://github.com/jpeckham/SPT-Freecam.git
+[submodule "mods/SPT-RaidReview"]
+	path = mods/SPT-RaidReview
+	url = https://github.com/jpeckham/SPT-RaidReview.git
+[submodule "mods/SPT-Skipper"]
+	path = mods/SPT-Skipper
+	url = https://github.com/jpeckham/SPT-Skipper.git
+[submodule "mods/SPTOpenSesame"]
+	path = mods/SPTOpenSesame
+	url = https://github.com/jpeckham/SPTOpenSesame.git
