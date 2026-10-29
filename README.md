@@ -903,7 +903,7 @@ The October 10 loader donor's four native signatures each match once in 48484. T
 
 Applied the current launcher's metadata delta to a separate output file using the same SharpHDiffPatch helper as the 48146 attempt. It produced 32,182,032 bytes with the expected metadata magic and SHA-256 `2699cd0dda2035b01a452acac2b3e4200a136407ad01196bdb7545001f2b29cb`. The current launcher explicitly lacks checksum validation in this path, so successful delta application is not evidence of semantic compatibility. Nothing was patched in the live installation.
 
-**Latest status:** package built and installed; server and patched client start and communicate. Profile/menu completion, a raid, and gameplay-mod compatibility remain unverified. See N7 for the startup evidence and current limits.
+**Latest status:** package built and installed; patched client/server startup succeeded, followed by profile creation, local-raid startup, bot generation and active bot-patrol logs. Completed-raid stability and gameplay-mod compatibility remain unverified. See N7 for evidence and limits.
 
 ### N4. Build and bootstrap the new references
 
@@ -970,3 +970,5 @@ Source-control state:
 - Prior 48146 generated changes were saved before selecting new pins: Bento stash `0c729075d3925b266a8c1b58aef287b65d318dc3`, Launcher stash `0fd69938955d44eb3d609d0bd9237d96227ea061`, both named `Preserved 48146 generated files before selecting 48484 parent pins`. These are local, alongside the earlier full dirty-state backup. Apply only after restoring the corresponding old checkout; do not apply blindly over the new version.
 
 The old installation and live source are preserved; no new-version files were installed into either. Do not run both SPT servers simultaneously on port 6969. To launch this test normally, start `D:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\SPT.Server.exe`, wait for readiness, then launch `SPT.Launcher.exe` from the same runtime folder and choose LocalBuildTest48484. The direct-argument startup is verified; the new Avalonia launcher's interactive flow and an actual raid still need testing.
+
+**Later observation during this attempt:** after the initial startup checkpoint, the server received `/client/game/profile/create`, `/client/raid/configuration`, `/client/match/local/start` and bot-generation requests. The client then logged active bot patrol updates. This establishes progress into a running local raid; it does not establish extraction/raid completion, save integrity across a completed raid, or long-session stability. Server bot-difficulty fallback warnings remain. Both test processes were left running for James.
