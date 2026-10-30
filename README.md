@@ -1011,3 +1011,12 @@ RaidReview automated checks passed: RecordingPipeline 1,182; HeadlessPresentatio
 Validation limits: this was startup/native-component testing, not a new full modded raid. Freecam's actual in-raid leashing and RaidReview's sustained FPS still need a user retest; neither is declared resolved by the rebuild. SAIN is absent, so its optional integration is compile-checked only. The test client logged a WebSocket frame-read exception during normal shutdown and an invalid-layer warning; startup/mod loading did not log a plugin failure. Earlier game-data compatibility limitations remain. The personal save was read/loaded by the server, not used for a test raid.
 
 Evidence is local under `.local-build-attempt/2026-10-29/48484/mods-save-migration` (build, automated-test, server and client logs). Public source pins and installed binary hashes are in [the mod manifest](docs/build-48484/mods-manifest.json); saves, settings, recordings and binaries stay outside Git. Earlier N6–N7 statements about no mods/save describe the pre-migration checkpoint and are superseded by N8.
+
+
+### N9. Relocate 48484 to C: — October 29, 2026
+
+After James freed C: space, he requested moving the 48484 installation alongside the preserved 48146 installation. The current 48484 path is **`C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484`**. Earlier D: paths in N2–N8 record the original build/migration location; use C: for current commands.
+
+With the game, launcher and server stopped, copied the entire installation with Robocopy (`/E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /MT:16 /XJ`). The source contained no reparse points. Verified all 15,261 files (89,027,713,400 bytes) against the source using SHA-256; every file matched before changing the launcher configuration. Automatic approval review rejected removal of the old D: directory with "blocked by policy", so that duplicate remains for manual deletion. The active installation and launcher path now use C:. Updated the active launcher's GamePath while retaining the preferred personal profile, and updated all five mod forks' build/test project defaults and current README paths. Historical backups and logs retain their original paths. The preserved 48146 installation was not changed. Copy/verification evidence is local under `.local-build-attempt/relocate-48484`.
+
+Start `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\SPT.Server.exe`, then `SPT.Launcher.exe` from that same runtime directory. The relocation does not start either process automatically.
