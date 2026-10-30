@@ -1,0 +1,14 @@
+<Project>
+  <!-- Local BE build adapter; does not modify upstream project files. -->
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'ServerValueModifier'">
+    <PackageReference Remove="SPTushonka.Common;SPTushonka.DI;SPTushonka.Server.Core;SPTushonka.Reflection" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <Reference Include="SPTarkov.Common;SPTarkov.DI;SPTarkov.Server.Core;SPTarkov.Reflection;SemanticVersioning;0Harmony;Spectre.Console;Spectre.Console.Ansi">
+      <HintPath>$(SPTPath)/SPT_Runtime/%(Identity).dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <Target Name="ValidateSvmLocalReferences" BeforeTargets="ResolveReferences" Condition="'$(MSBuildProjectName)' == 'ServerValueModifier'">
+    <Error Condition="!Exists('$(SPTPath)/SPT_Runtime/SPTarkov.Server.Core.dll')" Text="Set SPTPath to the BE game folder." />
+  </Target>
+</Project>

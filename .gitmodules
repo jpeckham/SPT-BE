@@ -83,3 +83,7 @@
 	path = mods/AnyPlaceAnyTime
 	url = https://github.com/jpeckham/AnyPlaceAnyTime.git
 	branch = spt-5.0-eft-1.3.0.0.48484
+[submodule "mods/svm-csharp"]
+	path = mods/svm-csharp
+	url = https://github.com/jpeckham/svm-csharp.git
+	branch = spt-5.0-eft-1.3.0.0.48484

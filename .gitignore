@@ -38,6 +38,7 @@
 !/mods/QuestMarkers/
 !/mods/AllQuestsCheckmarks/
 !/mods/AnyPlaceAnyTime/
+!/mods/svm-csharp/
 
 **/bin/
 **/obj/
