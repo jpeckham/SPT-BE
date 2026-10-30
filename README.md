@@ -1154,3 +1154,45 @@ Steps and compatibility changes:
 7. Removed the temporary harness and confirmed a second normal server startup with the production mod. Stopped the server afterward. Local logs/snapshots are in `.local-build-attempt/ref-friendly`. In-game objective progression and reward turn-in remain unverified; James can now test those. The older 48146 installation was untouched.
 
 Configuration changes require a server restart. Keep the installed folder name for its web config editor. To uninstall, stop client/server and remove the mod folder. Base quest templates return on restart, but uninstalling does not undo progress or rewards already saved; use the backup only when deliberately reverting that progress.
+
+### WebOverlay, QuestMarkers and All Quests Checkmarks — 48484 ports
+
+Completed October 29, 2026, in the requested dependency order: WebOverlay, QuestMarkers, then All Quests Checkmarks. Inspected upstream branches, public forks and PRs; no usable public SPT 5.0 IL2CPP port was found. Created James's forks and version branches, retaining original attribution/licenses. All use `spt-5.0-eft-1.3.0.0.48484`; the exact commits are pinned as submodules in this repository.
+
+| Mod | Upstream starting commit | Local port commit | Installed directory relative to the 48484 game |
+| --- | --- | --- | --- |
+| [WebOverlay](https://github.com/jpeckham/WebOverlay) 1.11.0 | `c160e695` | `9bf3031` | `BepInEx/plugins/Anvil-WebOverlay` |
+| [QuestMarkers](https://github.com/jpeckham/QuestMarkers) 1.3.0 | `044e04d2` | `4737d1b` | `BepInEx/plugins/QuestMarkers` |
+| [AllQuestsCheckmarks](https://github.com/jpeckham/AllQuestsCheckmarks) 1.4.0 | `dbd973f1` | `31ce21b` | `BepInEx/plugins/AllQuestsCheckmarks` and `SPT_Runtime/user/mods/AllQuestsCheckmarks` |
+
+AllQuestsCheckmarks also pins James's [shared-library fork](https://github.com/jpeckham/SPT-ZGFueDkxCommonLibrary) at `09e2730`, nested under `Shared`. Clone/update this workspace with recursive submodules. Fork READMEs document exact build commands and compatibility changes. These are local development ports, not upstream-supported 5.0 releases.
+
+1. Built against the actual 48484 BepInXDX/IL2CPP and server assemblies with .NET 10. Replaced Mono plugin lifecycles with injected native Unity components; adapted native casts, changed quest APIs and local build references. Builds stage under each mod's `Build` directory instead of deploying automatically.
+2. WebOverlay required native Update/LateUpdate forwarding and owned pump cleanup. QuestMarkers required native condition promotion, zoneIds arrays, the current completed-condition API and generated onBeforeRender callback signature. It references the installed local WebOverlay port.
+3. AllQuestsCheckmarks required updated native UI/profile/locale APIs and server models. Runtime checks exposed Color config conversion and sprite lifetime issues: added the TOML converter in Shared and retained the loaded sprite/texture through Unity's startup unused-asset cleanup. Added managed JSON conversion for native MongoID values. Fika is not ported/tested; this installation uses standalone SPT.
+4. Backed up profiles before testing to `.local-build-attempt/overlay-mods/profiles-before`. Installed only into `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484`. Tests read quest data and constructed native objects; they did not complete quests, purchase items or reset either played profile. Normal client startup can update profile timestamps.
+5. Build results: WebOverlay 10 compiler/platform warnings, QuestMarkers zero warnings, AllQuestsCheckmarks client 30 nullable/unused warnings and server zero warnings; all zero errors. WebOverlay's 12 channel checks and native Update/main-thread message check passed. QuestMarkers' nine native condition conversions, multi-zone field and no-raid guard passed. AllQuestsCheckmarks read-only endpoints returned 790 quests/16 active item quests; its native harness verified 1,174 cached item templates, ID value equality, sprite retention and RGBA config round-trip.
+6. Removed temporary RuntimeChecks DLLs after capturing logs under `.local-build-attempt/overlay-mods`. Stopped the owned test client and server. Source, tests and instructions were committed and pushed to James's forks, including the nested Shared dependency. Older installations remain untouched.
+
+WebOverlay is a library and has no UI of its own. Use **windowed/borderless mode**; QuestMarkers uses **I** by default to show markers for six seconds. In-raid positioning, cursor behavior and AllQuestsCheckmarks' normal character-selection refresh, tooltip visuals and quest progression remain for player validation. The WebOverlay harness does not show its test window, so its PASS is not a visual transparency test. The Checkmarks harness explicitly refreshes read-only data, so it does not prove the normal character-selection hook.
+
+Installed production DLL SHA-256 values:
+
+| DLL | SHA-256 |
+| --- | --- |
+| `Anvil-WebOverlay.dll` | `B6617E9882E16F84F3E1A47A81DE36C3269C4E136354F408971007FD2CEF7432` |
+| `maschine-QuestMarkers.dll` | `06E575F0662ADD0DED0A73A3B4AED40E28381C31CA6AD25097451E8C4746B082` |
+| `AllQuestsCheckmarks-Client.dll` | `9CFEFC7A0910ADE2A2175CB3D79D97E624B52CB9018933D633B4F2F1EBF673BD` |
+| `AllQuestsCheckmarks-Server.dll` | `1BF254C22570191F6AC387BBD21F7B0F1CB58A9A9A62FF1EBB64BBD7CB95B1D6` |
+
+To uninstall, close client/server and remove the corresponding installed folders. QuestMarkers depends on WebOverlay: remove QuestMarkers first if removing that library. AllQuestsCheckmarks has both client and server folders. Leave saves in place; restoring an older backup would discard subsequent play.
+
+### Saved test tools and repeatable local processes
+
+At James's request, reusable verification source belongs in the repo it tests; only installation/process orchestration belongs in SPT-BE. [scripts/README.md](scripts/README.md) is the process guide and tool index, covering prerequisites, commands, expected results, log capture, profile handling, temporary harness removal and process shutdown.
+
+- Local helpers: [Start-BESmokeProcess.ps1](scripts/Start-BESmokeProcess.ps1), [Stop-BESmokeProcess.ps1](scripts/Stop-BESmokeProcess.ps1), and the previously saved [Import-LiveControls.ps1](scripts/Import-LiveControls.ps1). Start/stop record and verify PID, executable path and start time. The helpers were used for the native Checkmarks checks; `-WhatIf` and already-stopped behavior were also verified.
+- Mod-specific instructions and harnesses: [WebOverlay tests](mods/WebOverlay/tests/README.md), [QuestMarkers tests](mods/QuestMarkers/tests/README.md), [AllQuestsCheckmarks tests](mods/AllQuestsCheckmarks/tests/README.md). Ref Friendly and FreeTarcoins already retain their checks in their own forks.
+- Moved the earlier scratch stash-cap integration test into the [server fork's Testing/LocalIntegration](server-csharp/Testing/LocalIntegration/README.md), commit `c8a58869c`. It now accepts explicit runtime/profile/output arguments and has no hardcoded personal profile ID or dependency on executing another test script's source. Preserved the original purchase/concurrency assertions. Checked the relocated script's syntax/help; did not rerun purchases on the now-played character.
+
+Build outputs, private profiles/backups, process JSON, HTML captures and logs remain ignored local artifacts. One-off historical repair scripts are not promoted as reusable migration tools. New reusable tools should follow this ownership rule and document what they actually prove, including manual validation gaps.

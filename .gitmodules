@@ -67,3 +67,15 @@
 [submodule "mods/reffriendlyquests-csharp"]
 	path = mods/reffriendlyquests-csharp
 	url = https://github.com/jpeckham/reffriendlyquests-csharp.git
+[submodule "mods/WebOverlay"]
+	path = mods/WebOverlay
+	url = https://github.com/jpeckham/WebOverlay.git
+	branch = spt-5.0-eft-1.3.0.0.48484
+[submodule "mods/QuestMarkers"]
+	path = mods/QuestMarkers
+	url = https://github.com/jpeckham/QuestMarkers.git
+	branch = spt-5.0-eft-1.3.0.0.48484
+[submodule "mods/AllQuestsCheckmarks"]
+	path = mods/AllQuestsCheckmarks
+	url = https://github.com/jpeckham/AllQuestsCheckmarks.git
+	branch = spt-5.0-eft-1.3.0.0.48484

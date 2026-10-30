@@ -34,6 +34,9 @@
 !/mods/SPTOpenSesame/
 !/mods/FreeTarcoins/
 !/mods/reffriendlyquests-csharp/
+!/mods/WebOverlay/
+!/mods/QuestMarkers/
+!/mods/AllQuestsCheckmarks/
 
 **/bin/
 **/obj/
