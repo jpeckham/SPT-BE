@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "target": "SPT 5.0.0 / EFT 1.3.0.0.48484",
+  "kind": "server-only",
+  "dll_sha256": "f078aa7435434e53373b41b078bb4a8800bcc5cb3a3ef13f71a53ee06170f777",
+  "engine_checks": 22,
+  "component_checks": 10,
+  "live_credit_persistence_and_duplicate_tests": "passed on disposable profile",
+  "personal_balance_changed": false,
+  "in_game_visual_and_purchase_tested": false,
+  "server_left_running": false
+}

@@ -1061,3 +1061,18 @@ Each Client shortcut targets `SPT_Runtime/SPT.Launcher.exe`; each Server shortcu
 ### FreeTarcoins repository — October 29, 2026
 
 Created [jpeckham/FreeTarcoins](https://github.com/jpeckham/FreeTarcoins) as a public MIT-licensed repository and added it as the `mods/FreeTarcoins` submodule. Initialized `main` and the version-specific `spt-5.0-eft-1.3.0.0.48484` development branch. The README records the requested Tarcoin-button amount-entry flow and local SPT scope. This checkpoint contains repository scaffolding only: no plugin has been implemented, built or installed, and no profile balances were changed.
+
+
+### FreeTarcoins 0.1.0 installed — October 29, 2026
+
+Implemented [FreeTarcoins](https://github.com/jpeckham/FreeTarcoins) for the C: 48484 installation. James clarified that the target was the Tarcoin balance **inside Expansion Hub**. That header was display-only in SPT's web implementation. The final mod replaces only its Blazor header rendering with an adapted header and amount-entry dialog. It is **server-only** and needs neither a BepInEx plugin nor WebOverlay. The initial main-menu client prototype was discarded (it also encountered an IL2CPP generic-callsite patch failure); its installed files were moved outside the game to `.local-build-attempt/freetarcoins/superseded-client`.
+
+Start the server and client, open Expansion Hub, click its Tarcoin balance, enter a positive whole amount to add, and press Add Tarcoins. The server credits through its existing TarcoinStoreService, saves the profile, and refreshes the shop's balance/affordability. Cancel/Escape/outside click closes the dialog before submission. No core repository or existing shop purchase implementation was modified.
+
+Installed files: `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\user\mods\FreeTarcoins`, containing the mod DLL, README, MIT license, adapted-header CC BY-NC-SA license and attribution. A local package is at `.local-build-attempt/freetarcoins/FreeTarcoins-0.1.0-48484.zip`. The source lives at `mods/FreeTarcoins` on the 48484 branch. No gameplay/client plugin belongs in the final package.
+
+Verification: Release build without warnings/errors; 22 credit-engine checks; 10 rendered-component checks including the real ShopHeader patch, click/amount form, requested input focus, Escape, invalid input, credit callback and reload. Actual HTTP tests on LocalBuildTest48484 verified +123 credits, replay without double credit, invalid/overflow requests, unknown/missing sessions and disk persistence. Repeated test runs left that disposable profile with 492 Tarcoins; JheredParnell's balance was unchanged. The final server logged `Expansion Hub balance dialog enabled` and returned HTTP 200 with the patched balance button. Installed DLL hash matched the build output. The test server was stopped afterward.
+
+In-game visual/input testing and a complete expansion purchase remain unverified. No browser automation surface was available for visual checks; rendered-component tests are not a substitute for that user test. Credit receipts suppress duplicate requests within the running server (last 1,024); they do not survive a server restart. If a notification fails after mutation, the mod still attempts to save; uncertain credit/save results ask the user to check their balance before trying again.
+
+WebOverlay was considered after James suggested it. Its documented target at review time was SPT 4.1.x/BepInEx 5; the existing Expansion Hub web UI made an additional overlay unnecessary for this control. No WebOverlay dependency was added. Details, commands, license notices and uninstall instructions are in the mod README. Local logs and the disposable-profile backup remain under `.local-build-attempt/freetarcoins`.
