@@ -64,3 +64,6 @@
 [submodule "mods/FreeTarcoins"]
 	path = mods/FreeTarcoins
 	url = https://github.com/jpeckham/FreeTarcoins.git
+[submodule "mods/reffriendlyquests-csharp"]
+	path = mods/reffriendlyquests-csharp
+	url = https://github.com/jpeckham/reffriendlyquests-csharp.git

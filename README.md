@@ -1136,3 +1136,21 @@ Repeatable import script: [scripts/Import-LiveControls.ps1](scripts/Import-LiveC
 Use `-LiveControls 'path\to\Control.ini'` to explicitly select another source, such as the previous SPT installation. The default always reads live Tarkov. Verified the preview against the active installation and the copy/backup path against a temporary fixture.
 
 James also confirmed the stash cap in game: mixed bundles and individual packs worked, four-row purchases blocked at 78 extra rows, and a final two-row purchase reached 80 as intended.
+
+### Ref Friendly Quests — SPT 5.0 / 48484 port and installation
+
+Requested source: [acidphantasm/reffriendlyquests-csharp](https://github.com/acidphantasm/reffriendlyquests-csharp). On October 29, 2026, upstream had only `master` at `6635a21eacb0f25e3d7216e182a6ae6d9367cf9a`, no public forks, and one closed, unmerged PR targeting 4.1.1. No existing public 5.0 port was found. Created [jpeckham/reffriendlyquests-csharp](https://github.com/jpeckham/reffriendlyquests-csharp), added it as `mods/reffriendlyquests-csharp`, and developed on `spt-5.0-eft-1.3.0.0.48484`. Port implementation commit: `e999b54`; the parent submodule pointer also includes subsequent project-file line-ending cleanup. Original author and MIT license retained.
+
+This is a server-only mod: it replaces six Arena-dependent Ref finish-condition sets with raid kills, updates objective text, and optionally adjusts Ref standing requirements and rewards. Installed the upstream supplied config: `ChangeLoyaltyLevelRequirements=true`, `LoyaltyLevelMultiplier=0.85`, `AddLegaMedalRewards=true`, `GpCoinMultiplier=1`. It does not automatically complete quests.
+
+Steps and compatibility changes:
+
+1. Replaced 4.1 NuGet references with references to the installed 48484 runtime assemblies. Kept .NET 10. Changed metadata to local version 2.1.1 / SPT 5.0, retained upstream attribution, and replaced automatic deployment/7-Zip execution with a local staging target.
+2. The first build exposed a real API change: `LoyaltyLevel.MinStanding` is now a nonnullable double. Removed its obsolete null/`.Value` handling. Release build then passed with **zero warnings/errors**.
+3. Startup exposed a schema change: `QuestConditionTypes` now requires `AvailableForStart` and `Fail`. Added empty fields to the replacement JSON so it deserializes. The mod still copies **only AvailableForFinish** into real quests; existing prerequisites/failure conditions remain untouched.
+4. Build command, from the mod folder: `dotnet build acidphantasm-reffriendlyquests.csproj -c Release`. Override the target with `-p:SPTPath=...` when needed. Output stages under `Build/SPT_Runtime/user/mods/acidphantasm-reffriendlyquests`; no server/game assemblies are packaged.
+5. With client/server stopped, backed up profiles to `.local-build-attempt/ref-friendly/backup-20261029-214919/profiles` and installed the staged folder into `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\user\mods\acidphantasm-reffriendlyquests`. Package: mod DLL, config.json, db/quests.json, README.md and LICENSE. DLL SHA-256: `D7A5E31E0EB5692E65BBB11487F30A4490387A3DA40557107E90C07D29DFEA42`.
+6. Built and temporarily installed the read-only runtime harness in `tests/RuntimeChecks.csproj`. Its snapshots bracketed mod startup and captured all 20 Ref quests. `python tests/verify_runtime.py --runtime '<game>/SPT_Runtime'` passed: six replacement objective sets, six populated weapon groups, locale overrides, preserved prerequisites/fail conditions, Lega reward sets on all 15 targeted quests, unchanged GP rewards at multiplier 1, and the 0.85 standing multiplier. Profile JSON content was verified unchanged.
+7. Removed the temporary harness and confirmed a second normal server startup with the production mod. Stopped the server afterward. Local logs/snapshots are in `.local-build-attempt/ref-friendly`. In-game objective progression and reward turn-in remain unverified; James can now test those. The older 48146 installation was untouched.
+
+Configuration changes require a server restart. Keep the installed folder name for its web config editor. To uninstall, stop client/server and remove the mod folder. Base quest templates return on restart, but uninstalling does not undo progress or rewards already saved; use the backup only when deliberately reverting that progress.
