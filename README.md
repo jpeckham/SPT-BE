@@ -1126,4 +1126,13 @@ The earlier C13 import targeted the previous installation. At James's request, c
 
 This imports key bindings, mouse sensitivity and other settings in Control.ini directly from live. Graphics, audio and other settings files were not changed. To undo, close the client and restore the backed-up Control.ini. User confirmation is still needed for the bindings in game.
 
+Repeatable import script: [scripts/Import-LiveControls.ps1](scripts/Import-LiveControls.ps1), requiring PowerShell 7. It refuses to run while the client is open, validates the controls JSON, backs up the destination, copies only Control.ini and verifies SHA-256. A failed copy/verification restores the backup. Preview with `-WhatIf`, then omit that flag to perform the import:
+
+```powershell
+./scripts/Import-LiveControls.ps1 -GamePath 'C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484' -WhatIf
+./scripts/Import-LiveControls.ps1 -GamePath 'C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484'
+```
+
+Use `-LiveControls 'path\to\Control.ini'` to explicitly select another source, such as the previous SPT installation. The default always reads live Tarkov. Verified the preview against the active installation and the copy/backup path against a temporary fixture.
+
 James also confirmed the stash cap in game: mixed bundles and individual packs worked, four-row purchases blocked at 78 extra rows, and a final two-row purchase reached 80 as intended.
