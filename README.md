@@ -1020,3 +1020,25 @@ After James freed C: space, he requested moving the 48484 installation alongside
 With the game, launcher and server stopped, copied the entire installation with Robocopy (`/E /COPY:DAT /DCOPY:DAT /R:1 /W:1 /MT:16 /XJ`). The source contained no reparse points. Verified all 15,261 files (89,027,713,400 bytes) against the source using SHA-256; every file matched before changing the launcher configuration. Automatic approval review rejected removal of the old D: directory with "blocked by policy", so that duplicate remains for manual deletion. The active installation and launcher path now use C:. Updated the active launcher's GamePath while retaining the preferred personal profile, and updated all five mod forks' build/test project defaults and current README paths. Historical backups and logs retain their original paths. The preserved 48146 installation was not changed. Copy/verification evidence is local under `.local-build-attempt/relocate-48484`.
 
 Start `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\SPT.Server.exe`, then `SPT.Launcher.exe` from that same runtime directory. The relocation does not start either process automatically.
+
+
+### Older installation names and desktop shortcuts — October 29, 2026
+
+Audited C:\sptarkov and D:\sptarkov at James's request. Read each installed EscapeFromTarkov.exe ProductVersion directly (including the fourth version component and build number); no release-date inference was needed. Renamed ten older SPT folders in place, preserving the VR designation, and updated each launcher's saved GamePath. Existing BE folder names and the two already-versioned Client archive folders were left unchanged.
+
+| Previous folder | Current folder | EFT version |
+| --- | --- | --- |
+| `C:\sptarkov\SPTarkov 4.1.6` | `C:\sptarkov\SPTarkov 4.1.6-0.16.9.5.40743` | 0.16.9.5.40743 |
+| `D:\SPTarkov\SPT 3.6.1` | `D:\SPTarkov\SPTarkov 3.6.1-0.13.1.3.25206` | 0.13.1.3.25206 |
+| `D:\SPTarkov\SPT 3.7.6` | `D:\SPTarkov\SPTarkov 3.7.6-0.13.5.3.26535` | 0.13.5.3.26535 |
+| `D:\SPTarkov\SPTarkov 3.10.5` | `D:\SPTarkov\SPTarkov 3.10.5-0.15.5.1.33420` | 0.15.5.1.33420 |
+| `D:\SPTarkov\SPTarkov 3.11.3 VR` | `D:\SPTarkov\SPTarkov 3.11.3-VR-0.16.1.3.35392` | 0.16.1.3.35392 |
+| `D:\SPTarkov\SPTarkov 3.8.3` | `D:\SPTarkov\SPTarkov 3.8.3-0.14.1.2.29197` | 0.14.1.2.29197 |
+| `D:\SPTarkov\SPTarkov 3.9.8` | `D:\SPTarkov\SPTarkov 3.9.8-0.14.9.1.30626` | 0.14.9.1.30626 |
+| `D:\SPTarkov\SPTarkov 4.0.11` | `D:\SPTarkov\SPTarkov 4.0.11-0.16.9.0.40087` | 0.16.9.0.40087 |
+| `D:\SPTarkov\SPTarkov 4.0.13` | `D:\SPTarkov\SPTarkov 4.0.13-0.16.9.0.40087` | 0.16.9.0.40087 |
+| `D:\SPTarkov\SPTarkov 4.1.0` | `D:\SPTarkov\SPTarkov 4.1.0-0.16.9.5.40743` | 0.16.9.5.40743 |
+
+Updated all 16 existing SPT desktop shortcuts (eight client/server pairs), including working directories and any matching icon/argument paths. Fixed the stale C: targets for 4.0.13 and 4.1.0 to their actual D: installations. Kept shortcut display names unchanged. Reopened saved shortcuts and verified all executable targets and working directories exist; rechecked all ten executable versions and launcher GamePaths. This validates paths, not gameplay compatibility of old builds. No game or server was started.
+
+Original shortcuts and launcher configurations, plus before/after path inventories, are backed up locally under `.local-build-attempt/version-folders`. That backup contains private launcher settings and is not committed.
