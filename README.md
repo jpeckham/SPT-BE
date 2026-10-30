@@ -1196,3 +1196,7 @@ At James's request, reusable verification source belongs in the repo it tests; o
 - Moved the earlier scratch stash-cap integration test into the [server fork's Testing/LocalIntegration](server-csharp/Testing/LocalIntegration/README.md), commit `c8a58869c`. It now accepts explicit runtime/profile/output arguments and has no hardcoded personal profile ID or dependency on executing another test script's source. Preserved the original purchase/concurrency assertions. Checked the relocated script's syntax/help; did not rerun purchases on the now-played character.
 
 Build outputs, private profiles/backups, process JSON, HTML captures and logs remain ignored local artifacts. One-off historical repair scripts are not promoted as reusable migration tools. New reusable tools should follow this ownership rule and document what they actually prove, including manual validation gaps.
+
+### AlwaysSpecial — new mod concept
+
+Created [jpeckham/AlwaysSpecial](https://github.com/jpeckham/AlwaysSpecial) at James's request and linked it as `mods/AlwaysSpecial`. The idea is to allow placing quest cameras, markers and jammers even when none were brought into the raid. Its README records the concept, proposed behavior, implementation questions and required future tests. Initial documentation commit: `6ca3d7f`, published on `main` and `spt-5.0-eft-1.3.0.0.48484`. This is a concept repository only; no plugin has been implemented or installed. Mod-specific tests will live there, while local BE orchestration remains here.

@@ -37,6 +37,7 @@
 !/mods/WebOverlay/
 !/mods/QuestMarkers/
 !/mods/AllQuestsCheckmarks/
+!/mods/AlwaysSpecial/
 
 **/bin/
 **/obj/
