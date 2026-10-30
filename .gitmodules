@@ -61,3 +61,6 @@
 [submodule "mods/SPTOpenSesame"]
 	path = mods/SPTOpenSesame
 	url = https://github.com/jpeckham/SPTOpenSesame.git
+[submodule "mods/FreeTarcoins"]
+	path = mods/FreeTarcoins
+	url = https://github.com/jpeckham/FreeTarcoins.git

@@ -1,6 +1,6 @@
 # Source control for the SPT-BE workspace
 
-The parent repository is https://github.com/jpeckham/SPT-BE. Its 21 immediate child repositories are Git submodules pointing to James's forks. Every submodule entry pins an exact commit; a branch name alone does not determine a checkout. Upstream projects retain their own histories and licenses. The parent MIT license applies to the parent workspace material, not as a replacement for child-project licenses.
+The parent repository is https://github.com/jpeckham/SPT-BE. Its 22 child repositories are Git submodules in James's account: 21 forks and the original FreeTarcoins repository. Every submodule entry pins an exact commit; a branch name alone does not determine a checkout. Upstream projects retain their own histories and licenses. The parent MIT license applies to the parent workspace material, not as a replacement for child-project licenses.
 
 ## Clone the recorded workspace
 

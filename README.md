@@ -1056,3 +1056,8 @@ Created four shortcuts on James's desktop (`C:\Users\james\OneDrive\Desktop`):
 | `5.0.0 BE 1.3.0.0.48484 Server` | Same 48484 installation |
 
 Each Client shortcut targets `SPT_Runtime/SPT.Launcher.exe`; each Server shortcut targets `SPT_Runtime/SPT.Server.exe`. All four use their installation's `SPT_Runtime` as the working directory and the target executable's icon, with no extra arguments. Reopened the saved shortcuts and verified exact targets/working directories and executable existence. These shortcuts use C:, not the remaining D: duplicate. Creation did not start any game or server. Start the desired Server first, then its matching Client; run only one SPT server at a time because the installations share the backend port.
+
+
+### FreeTarcoins repository — October 29, 2026
+
+Created [jpeckham/FreeTarcoins](https://github.com/jpeckham/FreeTarcoins) as a public MIT-licensed repository and added it as the `mods/FreeTarcoins` submodule. Initialized `main` and the version-specific `spt-5.0-eft-1.3.0.0.48484` development branch. The README records the requested Tarcoin-button amount-entry flow and local SPT scope. This checkpoint contains repository scaffolding only: no plugin has been implemented, built or installed, and no profile balances were changed.
