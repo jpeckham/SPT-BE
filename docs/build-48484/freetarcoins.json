@@ -7,6 +7,7 @@
   "component_checks": 10,
   "live_credit_persistence_and_duplicate_tests": "passed on disposable profile",
   "personal_balance_changed": false,
-  "in_game_visual_and_purchase_tested": false,
+  "in_game_visual_and_purchase_tested": true,
+  "user_validation": "Dialog and wearable outfit purchase confirmed; separate server stash-bundle defect corrected in 7ddd8ac58",
   "server_left_running": false
 }
