@@ -41,6 +41,7 @@ The client helper uses the current local HTTPS backend on port 6969 and launch a
 | WebOverlay fork | `tests/RuntimeChecks.csproj`, `tools/Probe` and `tests/README.md` |
 | QuestMarkers fork | `tests/RuntimeChecks.csproj` and `tests/README.md` |
 | AllQuestsCheckmarks fork | `tests/RuntimeChecks.csproj`, `tests/server_probe.py` and `tests/README.md` |
+| AlwaysSpecial repo | `tests/PolicyTests.csproj`, `tests/RuntimeChecks.csproj`, `tools/Inspect` and `tests/README.md` |
 | Ref Friendly Quests fork | `tests/RuntimeChecks.csproj`, `tests/verify_runtime.py`; instructions in mod README |
 | FreeTarcoins fork | `Tests/Tests.csproj`, `Tests/integration.py`; instructions in mod README |
 | Server fork | Shop unit tests and `Testing/LocalIntegration/stash_cap.py` |
