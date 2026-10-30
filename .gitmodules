@@ -79,7 +79,7 @@
 	path = mods/AllQuestsCheckmarks
 	url = https://github.com/jpeckham/AllQuestsCheckmarks.git
 	branch = spt-5.0-eft-1.3.0.0.48484
-[submodule "mods/AlwaysSpecial"]
-	path = mods/AlwaysSpecial
-	url = https://github.com/jpeckham/AlwaysSpecial.git
+[submodule "mods/AnyPlaceAnyTime"]
+	path = mods/AnyPlaceAnyTime
+	url = https://github.com/jpeckham/AnyPlaceAnyTime.git
 	branch = spt-5.0-eft-1.3.0.0.48484
