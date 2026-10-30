@@ -1042,3 +1042,17 @@ Audited C:\sptarkov and D:\sptarkov at James's request. Read each installed Esca
 Updated all 16 existing SPT desktop shortcuts (eight client/server pairs), including working directories and any matching icon/argument paths. Fixed the stale C: targets for 4.0.13 and 4.1.0 to their actual D: installations. Kept shortcut display names unchanged. Reopened saved shortcuts and verified all executable targets and working directories exist; rechecked all ten executable versions and launcher GamePaths. This validates paths, not gameplay compatibility of old builds. No game or server was started.
 
 Original shortcuts and launcher configurations, plus before/after path inventories, are backed up locally under `.local-build-attempt/version-folders`. That backup contains private launcher settings and is not committed.
+
+
+### BE desktop shortcuts — October 29, 2026
+
+Created four shortcuts on James's desktop (`C:\Users\james\OneDrive\Desktop`):
+
+| Shortcut name | Installation |
+| --- | --- |
+| `5.0.0 BE 1.2.5.0.48146 Client` | `C:\sptarkov\SPTarkov 5.0.0-BE-1.2.5.0.48146` |
+| `5.0.0 BE 1.2.5.0.48146 Server` | Same 48146 installation |
+| `5.0.0 BE 1.3.0.0.48484 Client` | `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484` |
+| `5.0.0 BE 1.3.0.0.48484 Server` | Same 48484 installation |
+
+Each Client shortcut targets `SPT_Runtime/SPT.Launcher.exe`; each Server shortcut targets `SPT_Runtime/SPT.Server.exe`. All four use their installation's `SPT_Runtime` as the working directory and the target executable's icon, with no extra arguments. Reopened the saved shortcuts and verified exact targets/working directories and executable existence. These shortcuts use C:, not the remaining D: duplicate. Creation did not start any game or server. Start the desired Server first, then its matching Client; run only one SPT server at a time because the installations share the backend port.
