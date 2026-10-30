@@ -1091,3 +1091,31 @@ James bought the 80-row bundle, but his saved purchase counter and `StashRows` b
 8. Stopped the test server and restored the disposable test profile from its backup. Local repair/probe scripts and logs remain in `.local-build-attempt/stash-bundle-fix`; private saves are not committed. The older 48146 install and D: duplicate were untouched. Restart server/client and inspect the stash to confirm the visible expansion; in-game rendering still needs James's confirmation.
 
 Rollback: with both processes stopped, restore the backed-up core DLL. Restore the profile backup only if deliberately reverting the repair and accepting loss of any gameplay progress since that backup; otherwise reverse just the repair after checking subsequent purchases/progress.
+
+### Enforce the advertised 80 extra stash-row cap — October 29, 2026
+
+James confirmed the repaired delivery in game: buying two rows and then the 20-row bundle produced 22 additional rows. He requested preventing purchases that would exceed the advertised maximum, rather than charging for unusable rows. We have not verified how live Tarkov implements this rule.
+
+Implemented in our server fork, commit `d9cd47dc7`, on `spt-5.0-eft-1.3.0.0.48484`:
+
+- The server resolves the full delivery and rejects a purchase when its quantity exceeds the remaining capacity under **80 purchased shop rows**. Exactly 80 is allowed. It rejects before deducting Tarcoins or granting anything; no partial grants. Edition/hideout stash space is not counted toward this shop cap. Existing rows, including any existing total above 80, are not removed.
+- A per-profile purchase lock prevents simultaneous requests from both using the same remaining capacity. Quantity comparisons use wide arithmetic to avoid overflow from extreme request counts.
+- Shop cards and detail pages disable oversized purchases, detail quantity selectors respect the remaining capacity, and confirmation checks the same limit. The detail page explains the 80-row limit. The server remains authoritative if a page is stale.
+- Testing exposed a separate shared-child ownership defect: buying a 20-row bundle marked all other bundles containing its four-row pack as Received. Repeatable packs no longer imply ownership of every containing bundle. An exact non-countable bundle remains purchase-once; different bundle sizes remain available when capacity permits. Outfit ownership is unchanged.
+
+Verification and installation:
+
+1. Added boundary cases and a regression reproducing the shared-child ownership failure. All **31 shop tests passed** using the test-output-only seasonal workaround documented above; its config was restored afterward. Independent review found no blocking issues.
+2. Built with `dotnet build Testing/UnitTests/UnitTests.csproj -c Release --no-restore -p:SptBuildType=BLEEDINGEDGEMODS -p:SptCommit=stashcap -p:SptBuildTime=20261029`: zero errors, 2,602 existing warnings. Installed the resulting Core and Web DLLs into the C: 48484 runtime only, while client/server were stopped.
+3. Backed up both previous DLLs and the LocalBuildTest48484 profile (now also used by James as his other character) in `.local-build-attempt/stash-cap/backup-20261029-205548`. Temporarily reset that test profile's shop entitlements for controlled cases; restored the complete original file **byte-for-byte** after testing. No test progress or credit remains on that character. Other profiles were verified unchanged during the tests.
+4. Actual installed-server requests verified: 2+80 rejected, 2+20=22, 22+60 rejected, huge quantity rejected, 78+2=80, and two concurrent final-pack requests yield exactly one success and one rejection. Rejections preserved balance, inventory, bonuses and purchase records. A separate run verified 20+60=80 succeeds and a repeat of the same 20-row bundle is rejected without charging.
+5. HTTP-rendered HTML verified the oversized detail purchase button is disabled and the limit explanation is present. In-game interaction with the new cap still needs user confirmation. Test scripts, rendered HTML and logs are in `.local-build-attempt/stash-cap`. The test server was stopped afterward.
+
+Installed SHA-256 values:
+
+| File | SHA-256 |
+| --- | --- |
+| `SPTarkov.Server.Core.dll` | `02BE9B46F27482772691F35C534FA8073E0E7E4A50EB0000F9611AF453719C81` |
+| `SPTarkov.Server.Web.dll` | `8D698040D7746F77D328A55C24DE3CE04213828A88137282C05D6687A2D0228A` |
+
+To roll back this cap change, stop client/server and restore **both DLLs** from the backup. Profile restoration is not required for rollback: the test character was already restored and no permanent profile migration was performed.
