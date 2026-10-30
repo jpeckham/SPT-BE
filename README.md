@@ -1119,3 +1119,11 @@ Installed SHA-256 values:
 | `SPTarkov.Server.Web.dll` | `8D698040D7746F77D328A55C24DE3CE04213828A88137282C05D6687A2D0228A` |
 
 To roll back this cap change, stop client/server and restore **both DLLs** from the backup. Profile restoration is not required for rollback: the test character was already restored and no permanent profile migration was performed.
+
+### Live controls imported into 48484 — October 29, 2026
+
+The earlier C13 import targeted the previous installation. At James's request, copied the current live `%APPDATA%\Battlestate Games\Escape from Tarkov\Settings\Control.ini` into `C:\sptarkov\SPTarkov 5.0.0-BE-1.3.0.0.48484\SPT_Runtime\user\sptSettings\Control.ini`. Verified the client was stopped and both files had the same top-level settings schema. Backed up the previous destination to `SPT_Runtime\user\migration-backups\controls-20261029-210717\Control.ini` before replacement. Source and destination SHA-256 match: `DEF71E01BB466A124612A93002C1A29208F212E8F04CA920FFC25673C1B7F52B`.
+
+This imports key bindings, mouse sensitivity and other settings in Control.ini directly from live. Graphics, audio and other settings files were not changed. To undo, close the client and restore the backed-up Control.ini. User confirmation is still needed for the bindings in game.
+
+James also confirmed the stash cap in game: mixed bundles and individual packs worked, four-row purchases blocked at 78 extra rows, and a final two-row purchase reached 80 as intended.
