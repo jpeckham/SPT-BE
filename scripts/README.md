@@ -50,6 +50,8 @@ Reusable source and instructions are committed in the owning repo. Installed DLL
 
 ## SVM local BE build and startup checks
 
+The local history was subsequently split into individual fix/UX commits. See [the current commit map](../docs/svm-commit-history.md); old hashes below identify the preserved pre-rewrite history.
+
 SVM's personal-use license prohibits sharing modified versions. The public fork/submodule therefore pins upstream `10957bc849dc6be7b4a3de60f63331e954401fbf`; local compatibility commit `e8e198844fbfdaa6c54e40c5554e2fe7d00465b2` is deliberately not pushed. Do not blindly push that branch or reset the local checkout to its public pin. The parent README describes the two personal-use edits. These parent tools belong here because they adapt the build to this local BE installation, generate its installation preset, and manage its GUI process; they do not distribute upstream source.
 
 From the parent repository, with .NET 10 SDK and Windows Desktop runtime installed:

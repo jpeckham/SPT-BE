@@ -1273,3 +1273,7 @@ Previous executable and settings are backed up under `.local-build-attempt/svm/u
 Follow-up layout correction: moved Apply Changes to the left of the contiguous Save / Load / profile-name controls, retaining the centered group. Local SVM commit: bc2e1e3. Rebuilt, installed and passed the Greed startup check (greed-20261030-205058.json). Current Greed SHA-256: A53EA80BC039CDA262958BE44B655ECC4FD62D028D49E96F2EC5A73BCCEF4168. No preset changes.
 
 Removed the unfinished Prestige tab from Greed at James's request (local SVM commit 48dde79). Existing preset fields remain compatible; this UI-only change does not alter server prestige rules or player progression. Published and installed the updated Greed.exe; startup check passed (greed-20261030-210022.json). Current SHA-256: B16D104C70C82E8373994075E763402E9A4CAD0CB62E1BD86F375E7FEEDF3B6E. The proposed per-prestige requirement editor was not implemented.
+
+### SVM history separated for review — 2026-10-31
+
+Rewrote the local SVM version branch into three separate functional fixes, five separate UX changes, and one build-ignore maintenance commit. Current local tip: 5e6a7ec. The exact final tracked tree and installed executable are unchanged. Original history is retained on backup/svm-before-atomic-history-20261031. See [the commit map and verification](docs/svm-commit-history.md) for individual hashes and how they replace earlier references. Personal modifications remain local; the public fork/submodule pin was not changed or force-pushed.
