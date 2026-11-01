@@ -87,3 +87,7 @@
 	path = mods/svm-csharp
 	url = https://github.com/jpeckham/svm-csharp.git
 	branch = spt-5.0-eft-1.3.0.0.48484
+[submodule "mods/StopYappin"]
+	path = mods/StopYappin
+	url = https://github.com/jpeckham/StopYappin.git
+	branch = spt-5.0-eft-1.3.0.0.48484

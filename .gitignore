@@ -39,6 +39,7 @@
 !/mods/AllQuestsCheckmarks/
 !/mods/AnyPlaceAnyTime/
 !/mods/svm-csharp/
+!/mods/StopYappin/
 
 **/bin/
 **/obj/
